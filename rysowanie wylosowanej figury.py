@@ -1,9 +1,12 @@
 import turtle
 import random
 from time import time
-
+a=0
 def tablica_wynik(tab):
-    min=float(tab[0])+1
+    if len(tab)==0:
+        min=10000000000000
+    else:
+        min=float(tab[0])+1
     for i in range(len(tab)):
         if float(tab[i])<min:
             min=float(tab[i])
@@ -24,13 +27,17 @@ def czas():
     else:
         turtle1.pencolor("red")
     turtle1.write(f"Czas:{czas}", font=('Arial', 16, 'normal'))
-def pen_color(a):
+def pen_color():
+    global a
     turtle1.pencolor(colors[a])
-    if a == len(colors)-1:
-        a = 0
-    else:
-        a+=1
+    a+=1
+    a=a%len(colors)
     return a
+
+def zasady():
+    turtle1.penup()
+    turtle1.goto(-450,200)
+    turtle1.write(zasady_gry,font=('Arial', 16, 'normal'))
 def up():
     turtle1.fd(10)
 
@@ -49,6 +56,7 @@ def right():
 
 def reset():
     turtle1.setheading(0)
+    turtle1.pencolor("black")
     turtle1.penup()
     turtle1.goto(0, 0)
     turtle1.pendown()
@@ -65,8 +73,7 @@ def losowanie_figury():
 
 def reset_window():
     turtle1.clear()
-    losowanie_figury()
-    # reset()
+    reset()
 
 
 def kwadrat():
@@ -109,15 +116,18 @@ Poruszasz się strzałkami.
 Gdy skończysz kliknij SPACE aby zobaczyć swoj czas.
 Jeśli napis jest na zielono, to jest to twój najlepszy wynik.
 A jeśli na czerwono,to nie pobiłeś swojego rekordu
-Klikająć R resetujesz grę."""
-a=0
+Klikająć R resetujesz grę.
+Aby zacząć kliknij R, potem S."""
+
 # zmienna oznaczająca indeks w tab colors w fun pen_color
 turtle1 = turtle.Turtle()
 win = turtle.Screen()
 win.setup(1000, 800)
-
-losowanie_figury()
+win.bgcolor("palegreen")
+zasady()
 t1=time()
+
+
 
 win.listen()
 win.onkeypress(up, "Up")
@@ -126,5 +136,6 @@ win.onkeypress(left, "Left")
 win.onkeypress(right, "Right")
 win.onkeypress(reset_window, "r")
 win.onkeypress(czas,"space")
-win.onkeypress(pen_color(a),"p")
+win.onkeypress(losowanie_figury,"s")
+win.onkeypress(pen_color,"p")
 turtle1.screen.mainloop()
