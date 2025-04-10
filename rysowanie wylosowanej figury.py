@@ -2,6 +2,7 @@ import turtle
 import random
 from time import time
 a=0
+b=1
 def tablica_wynik(tab):
     if len(tab)==0:
         min=10000000000000
@@ -17,7 +18,7 @@ def czas():
     turtle1.penup()
     turtle1.goto(200,200)
     turtle1.pendown()
-    file=open("wyniki.txt","a")
+file=open("wyniki.txt","a")
     file2=open("wyniki.txt","r")
     file2=file2.read().split()
     print(file2)
@@ -27,6 +28,12 @@ def czas():
     else:
         turtle1.pencolor("red")
     turtle1.write(f"Czas:{czas}", font=('Arial', 16, 'normal'))
+def rozmiar_up():
+    global b
+    turtle1.pensize(b+1)
+
+def rozmiar_down():
+    turtle1.pensize(b-1)
 def pen_color():
     global a
     turtle1.pencolor(colors[a])
@@ -138,4 +145,6 @@ win.onkeypress(reset_window, "r")
 win.onkeypress(czas,"space")
 win.onkeypress(losowanie_figury,"s")
 win.onkeypress(pen_color,"p")
+win.onkeypress(rozmiar_up,"d")
+win.onkeypress(rozmiar_down,"m")
 turtle1.screen.mainloop()
