@@ -18,7 +18,7 @@ def czas():
     turtle1.penup()
     turtle1.goto(200,200)
     turtle1.pendown()
-file=open("wyniki.txt","a")
+    file=open("wyniki.txt","a")
     file2=open("wyniki.txt","r")
     file2=file2.read().split()
     print(file2)
